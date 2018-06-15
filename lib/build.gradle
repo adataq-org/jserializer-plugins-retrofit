@@ -1,0 +1,14 @@
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    // JSerilizer
+        implementation files('libs/jserializer.jar')
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation files('libs/jserializer.jar')
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
