@@ -5,7 +5,9 @@ import org.adataq.jserializer.json.JsonStructure;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Converter;
@@ -42,7 +44,8 @@ public class JSerializerResponseBodyConverter implements Converter<ResponseBody,
                 return json.asJsonObject().to(Class.forName(objType));
             } else {
                 String genericCollectionTypeName = objType.substring(objType.indexOf("<") + 1, objType.indexOf(">"));
-                return Arrays.asList(json.asJsonArray().to(Class.forName(genericCollectionTypeName)));
+                List list = Arrays.asList(json.asJsonArray().to(Class.forName(genericCollectionTypeName)));
+                return new ArrayList<>(list);
             }
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
